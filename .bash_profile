@@ -41,6 +41,16 @@ function prompt() {
 
 prompt
 
+# Allow tmux sessions to write to common history
+# http://askubuntu.com/questions/339546/how-do-i-see-the-history-of-the-commands-i-have-run-in-tmux
+###
+# No duplication of commands in history
+export HISTCONTROL=ignoredups:erasedups
+# Appends to history file instead of overwriting when shell exits
+shopt -s histappend
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # Some basic aliases
 alias ls='ls -l'
 alias cls='clear'
