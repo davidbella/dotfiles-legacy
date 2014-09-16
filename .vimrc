@@ -37,12 +37,30 @@ syntax enable
 set background=dark
 colorscheme solarized
 
+" Set swapfiles out of the way
+set swapfile
+set dir=~/tmp
+
+" Set Buffergator to open on start
+" autocmd vimenter * BuffergatorOpen
+" autocmd vimenter * wincmd p
+
+" Don't close Buffergator after selecting a buffer
+" let buffergator_autodismiss_on_select=0
+
+" Have Buffergator open from the right and make it bigger
+let buffergator_viewport_split_policy="R"
+let buffergator_split_size=60
+
 " Automagically open NERDTree on vim startup and default to file window instead of NERDTree
 autocmd vimenter * NERDTree
 autocmd vimenter * wincmd p
 
 " Automagically close NERDTree if it is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Adjust NERDTree window size
+let NERDTreeWinSize=40
 
 " filetype plugin for use with NERDTree commenter
 let NERDSpaceDelims = 1
