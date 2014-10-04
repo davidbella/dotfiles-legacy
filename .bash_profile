@@ -1,42 +1,48 @@
-# Load local scripts
-# provides git auto completion for git commands and branch names
-if [ -f ~/.scripts/.git-completion.bash ]; then
-  . ~/.scripts/.git-completion.bash
+#####
+# Use 256 colors!
+export TERM=xterm-256color
+
+##### Load external scripts
+# Bash color helpers
+source ${HOME}/.scripts/.bash_colors
+source ${HOME}/.scripts/.bash_colors_256
+
+# Brew tab complete
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
 fi
 
-# provides "__git_ps1" function for use in prompt
-if [ -f ~/.scripts/.git-prompt.sh ]; then
-  source ~/.scripts/.git-prompt.sh
-fi
+# Fancy git bash prompt helper
+GIT_PROMPT_THEME=Solarized
 
-if [ -f ~/.scripts/.git-status-prompt.sh ]; then
-  source ~/.scripts/.git-status-prompt.sh
-fi
+# Only displays the 'on' in the callback if you are in a git repo
+function prompt_callback {
+  local repo=`git rev-parse --show-toplevel 2> /dev/null`
+  if [[ -e "$repo" ]]; then
+    echo " on"
+  fi
+}
 
-# easy to use bash colors
-# clr_xxx "param"
-if [ -f ~/.scripts/.bash_colors ]; then
-  source ~/.scripts/.bash_colors
-fi
+source ${HOME}/.scripts/bash-git-prompt/gitprompt.sh
 
-# Set the bash prompt
-function prompt() {
-  function git_symbol() {
-    if [ -d .git/ ]; then
-      clr_green $(get_git_status)
-    fi
-  }
+##### Set informative environment variables
+# Grab the current IP Addresses
+export EXTERNAL_IP=`curl -4 icanhazip.com 2>/dev/null &`
+export INTERNAL_IP=`ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>/dev/null &`
+export VPN_IP=`ifconfig tun0 2>/dev/null | grep 'inet' 2>/dev/null &`
+export VPN_IP=`echo $VPN_IP | awk '{print \"vpn \" $2}' > /dev/null 2>&1`
 
-  function git_branch() {
-    if [ -d .git/ ]; then
-      echo -n "on "
-      clr_red $(__git_ps1)
-    fi
-  }
+##### Set up the prompt
+# Creates a neat little spark line off of the IP addresses
+function prompt_spark() {
+  clr_red $(spark $(echo $EXTERNAL_IP | sed -e 's?\.?,?g'),0,0,0,0,$(echo $INTERNAL_IP | sed -e 's?\.?,?g') 2>/dev/null)
+}
 
-  PS1="\n\$(clr_cyan \u) on \$(clr_brown \h) in \$(clr_blue \w)\
- \$(git_branch) \$(git_symbol) \n\
-\[\033[35m\] \@ >> \[\033[0m\]";
+# Currently using the bash-git-prompt repo to help set my prompt
+# requires you to "wrap" the git status inside of your desired prompt
+function prompt {
+  GIT_PROMPT_START="\n \$(clr_cyan \u) using \$(clr_brown \h) in \$(clr_blue \w)"
+  GIT_PROMPT_END="\n \$(prompt_spark)   \$(clr_red \@)  "
 }
 
 prompt
@@ -51,32 +57,37 @@ shopt -s histappend
 # After each command, save and reload history
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# Some basic aliases
-alias ls='ls -l'
+##### Set a view usable environment variables
+# Make sure your editor is set to vim in a few scenarios
+export VISUAL="vim"
+export SVN_EDITOR="vim"
+export GIT_EDITOR="vim"
+export EDITOR="vim"
+
+# Adds a couple of the /usr locations to PATH, helpful for brew
+export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"
+export PATH="$USR_PATHS:$PATH"
+
+# Aliases
+# ls
+alias l='ls -lh'
+alias ls='ls -lh'
+alias la='ls -lah'
+# Files changed today - haven't gotten this to work outside of factset
+# alias lst="find . -daystart -maxdepth 1 -mtime -1 | sed -e 's?^\./\{0,1\}??' -e 's?^\..*??' | xargs ls -l --color -d"
+
+# clear
+alias c='clear'
 alias cls='clear'
 
-# Alias to open vimwiki fast
-alias vimwiki='vim ~/vimwiki/index.wiki'
+# Git
+alias gst="git status"
 
-# Some git aliases
-alias gst='git status'
+# fasd navigator
+eval "$(fasd --init auto)"
+alias v='f -e vim'
 
-# A bunch of stuff for RVM to work
-PATH=/usr/local/bin/:$PATH
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-EDITOR=vim
-
-[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc" # Load the default .bashrc
-
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Some common commands to remember
-
-# Start postgresql with -D(ata) going to /usr/local/var/postgres
-# postgres -D /usr/local/var/postgres
-
-# Stop all running VMs in VirtualBox
-# VBoxManage list runningvms | awk '{print $2;}' | xargs -I vmid VBoxManage controlvm vmid poweroff
+export RUBYMOTION_ANDROID_SDK=~/android-rubymotion/sdk
+export RUBYMOTION_ANDROID_NDK=~/android-rubymotion/ndk
