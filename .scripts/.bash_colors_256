@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ESC="\033["
+BG="48;5;"
+FG="38;5;"
+
+function clr_256
+{
+  text="$1"
+
+  background="$2"
+  foreground="$3"
+
+  result="${ESC}${BG}${2}m${ESC}${FG}${3}m${1}"
+
+  echo -e "$result"
+}
