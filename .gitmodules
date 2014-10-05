@@ -1,0 +1,6 @@
+[submodule ".vim/bundle/ag.vim"]
+	path = .vim/bundle/ag.vim
+	url = https://github.com/rking/ag.vim.git
+[submodule ".scripts/bash-git-prompt"]
+	path = .scripts/bash-git-prompt
+	url = git@github.com:magicmonty/bash-git-prompt.git
