@@ -18,7 +18,7 @@ GIT_PROMPT_THEME=Solarized
 # Only displays the 'on' in the callback if you are in a git repo
 function prompt_callback {
   local repo=`git rev-parse --show-toplevel 2> /dev/null`
-  if [[ -e "$repo" ]]; then
+  if [[ -n "$repo" ]]; then
     echo " on"
   fi
 }
@@ -27,15 +27,27 @@ source ${HOME}/.scripts/bash-git-prompt/gitprompt.sh
 
 ##### Set informative environment variables
 # Grab the current IP Addresses
-export EXTERNAL_IP=`curl -4 icanhazip.com 2>/dev/null &`
-export INTERNAL_IP=`ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>/dev/null &`
-export VPN_IP=`ifconfig tun0 2>/dev/null | grep 'inet' 2>/dev/null &`
-export VPN_IP=`echo $VPN_IP | awk '{print \"vpn \" $2}' > /dev/null 2>&1`
+function grab_ips {
+  echo "" > .external_ip
+  echo "" > .internal_ip
+  echo "" > .vpn_ip
+
+  curl -4 icanhazip.com 2>/dev/null > ${HOME}/.external_ip
+
+  ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>&1>/dev/null > ${HOME}/.internal_ip
+
+  local vpn_ip=`ifconfig tun0 2>/dev/null | grep 'inet' 2>/dev/null`
+  if [[ -n "$vpn_ip" ]]; then
+    echo $vpn_ip | awk '{print $2}' > ${HOME}/.vpn_ip
+  fi
+}
+
+grab_ips
 
 ##### Set up the prompt
 # Creates a neat little spark line off of the IP addresses
 function prompt_spark() {
-  clr_red $(spark $(echo $EXTERNAL_IP | sed -e 's?\.?,?g'),0,0,0,0,$(echo $INTERNAL_IP | sed -e 's?\.?,?g') 2>/dev/null)
+  clr_red $(spark $(cat ${HOME}/.external_ip | sed -e 's?\.?,?g'),0,0,0,0,$(cat ${HOME}/.internal_ip | sed -e 's?\.?,?g') 2>/dev/null)
 }
 
 # Currently using the bash-git-prompt repo to help set my prompt
