@@ -28,17 +28,20 @@ source ${HOME}/.scripts/bash-git-prompt/gitprompt.sh
 ##### Set informative environment variables
 # Grab the current IP Addresses
 function grab_ips {
-  echo "" > ~/.external_ip
-  echo "" > ~/.internal_ip
-  echo "" > ~/.vpn_ip
+  if test `find ~/.external_ip -mmin +5`
+  then
+    echo "" > ~/.external_ip
+    echo "" > ~/.internal_ip
+    echo "" > ~/.vpn_ip
 
-  curl -4 icanhazip.com 2>/dev/null > ~/.external_ip
+    curl -4 icanhazip.com 2>/dev/null > ~/.external_ip
 
-  ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>&1>/dev/null > ~/.internal_ip
+    ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>&1>/dev/null > ~/.internal_ip
 
-  local vpn_ip=`ifconfig tun0 2>/dev/null | grep 'inet' 2>/dev/null`
-  if [[ -n "$vpn_ip" ]]; then
-    echo $vpn_ip | awk '{print $2}' > ~/.vpn_ip
+    local vpn_ip=`ifconfig tun0 2>/dev/null | grep 'inet' 2>/dev/null`
+    if [[ -n "$vpn_ip" ]]; then
+      echo $vpn_ip | awk '{print $2}' > ~/.vpn_ip
+    fi
   fi
 }
 
