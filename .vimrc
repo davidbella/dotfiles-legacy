@@ -50,7 +50,7 @@ set dir=~/tmp
 
 " Have Buffergator open from the right and make it bigger
 let buffergator_viewport_split_policy="R"
-let buffergator_split_size=60
+let buffergator_split_size=80
 
 " Automagically open NERDTree on vim startup and default to file window instead of NERDTree
 autocmd vimenter * NERDTree
@@ -61,6 +61,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " Adjust NERDTree window size
 let NERDTreeWinSize=40
+
+" Binding to locate current file in NERDTree
+map <leader>r :NERDTreeFind<cr>
 
 " filetype plugin for use with NERDTree commenter
 let NERDSpaceDelims = 1
@@ -73,5 +76,3 @@ execute pathogen#infect()
 " Bind control p file finder to Command-T's - I got used to it
 " map <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
 " moved to ~/.vim/after/mappings/...
-
-
