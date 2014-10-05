@@ -47,14 +47,17 @@ grab_ips
 ##### Set up the prompt
 # Creates a neat little spark line off of the IP addresses
 function prompt_spark() {
-  clr_red $(spark $(cat ${HOME}/.external_ip | sed -e 's?\.?,?g'),0,0,0,0,$(cat ${HOME}/.internal_ip | sed -e 's?\.?,?g') 2>/dev/null)
+  spark $(cat ${HOME}/.external_ip | sed -e 's?\.?,?g'),0,0,0,0,$(cat ${HOME}/.internal_ip | sed -e 's?\.?,?g') 2>/dev/null
 }
 
 # Currently using the bash-git-prompt repo to help set my prompt
 # requires you to "wrap" the git status inside of your desired prompt
 function prompt {
+  local foreground=$(( ( RANDOM % 10 )  + 30 ))
+  local background=$(( ( RANDOM % 10 )  + 40 ))
+
   GIT_PROMPT_START="\n \$(clr_cyan \u) using \$(clr_brown \h) in \$(clr_blue \w)"
-  GIT_PROMPT_END="\n \$(prompt_spark)   \$(clr_red \@)  "
+  GIT_PROMPT_END="\n \[\033[1;${foreground}m\]\[\033[${background}m\]$(prompt_spark)\[\033[0m\]\[\033[0m\]  \[\033[32m\]\@\[\033[0m\]  "
 }
 
 prompt
