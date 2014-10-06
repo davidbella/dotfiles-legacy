@@ -98,9 +98,9 @@ export PATH="$USR_PATHS:$PATH"
 
 # Aliases
 # ls
-alias l='ls -lh'
-alias ls='ls -lh'
-alias la='ls -lah'
+alias l='ls -Glh'
+alias ls='ls -Glh'
+alias la='ls -Glah'
 # Files changed today - haven't gotten this to work outside of factset
 # alias lst="find . -daystart -maxdepth 1 -mtime -1 | sed -e 's?^\./\{0,1\}??' -e 's?^\..*??' | xargs ls -l --color -d"
 
