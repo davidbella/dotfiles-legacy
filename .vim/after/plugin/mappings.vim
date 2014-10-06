@@ -1,1 +1,3 @@
-map <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>T :ClearCtrlPCache\|:CtrlP<CR>
+nnoremap <leader>f :CtrlPBuffer<CR>
