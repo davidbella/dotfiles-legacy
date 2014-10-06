@@ -7,6 +7,9 @@ export TERM=xterm-256color
 source ${HOME}/.scripts/.bash_colors
 source ${HOME}/.scripts/.bash_colors_256
 
+# Git tab complete
+source ${HOME}/.scripts/.git-completion.bash
+
 # Brew tab complete
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
@@ -19,7 +22,7 @@ GIT_PROMPT_THEME=Solarized
 function prompt_callback {
   local repo=`git rev-parse --show-toplevel 2> /dev/null`
   if [[ -n "$repo" ]]; then
-    echo " on"
+    echo " with $(clr_cyan "$(git config user.name)") on"
   fi
 }
 
@@ -28,6 +31,13 @@ source ${HOME}/.scripts/bash-git-prompt/gitprompt.sh
 ##### Set informative environment variables
 # Grab the current IP Addresses
 function grab_ips {
+  if [[ ! -f '~/.external_ip' ]]
+  then
+    touch ~/.external_ip
+    touch ~/.internal_ip
+    touch ~/.vpn_ip
+  fi
+
   if test `find ~/.external_ip -mmin +5`
   then
     echo "" > ~/.external_ip
@@ -49,7 +59,7 @@ grab_ips
 
 ##### Set up the prompt
 # Creates a neat little spark line off of the IP addresses
-function prompt_spark() {
+function prompt_spark {
   spark $(cat ${HOME}/.external_ip | sed -e 's?\.?,?g'),0,0,0,0,$(cat ${HOME}/.internal_ip | sed -e 's?\.?,?g') 2>/dev/null
 }
 
@@ -102,8 +112,8 @@ alias cls='clear'
 alias gst="git status"
 
 # fasd navigator
-eval "$(fasd --init auto)"
-alias v='f -e vim'
+# eval "$(fasd --init auto)"
+# alias v='f -e vim'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
