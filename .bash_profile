@@ -11,7 +11,7 @@ source ${HOME}/.scripts/.bash_colors_256
 source ${HOME}/.scripts/.git-completion.bash
 
 # Brew tab complete
-if [ -f `brew --prefix`/etc/bash_completion ]; then
+if [[ `brew 2>/dev/null` && `brew --prefix`/etc/bash_completion ]]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
