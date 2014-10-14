@@ -1,3 +1,6 @@
 [alias]
   st = status
   co = checkout
+[user]
+	name = David Bella
+	email = dbella1@gmail.com
