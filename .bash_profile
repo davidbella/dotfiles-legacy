@@ -114,6 +114,9 @@ alias gst="git status"
 # fasd navigator
 # eval "$(fasd --init auto)"
 # alias v='f -e vim'
+function _fasd_prompt_func {
+  return
+}
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
