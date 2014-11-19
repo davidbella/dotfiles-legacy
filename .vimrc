@@ -70,6 +70,9 @@ let NERDSpaceDelims = 1
 filetype plugin on
 map <C-c> \c<space>
 
+" Automagically open quickfix window after some fugitive-vim commands
+autocmd QuickFixCmdPost *grep* cwindow
+
 " Run Pathogen
 execute pathogen#infect()
 
