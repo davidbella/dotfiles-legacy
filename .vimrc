@@ -73,6 +73,9 @@ map <C-c> \c<space>
 " Automagically open quickfix window after some fugitive-vim commands
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Allow ctrl-p to find dot files
+let g:ctrlp_dotfiles = 1
+
 " Run Pathogen
 execute pathogen#infect()
 
