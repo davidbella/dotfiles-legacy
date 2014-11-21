@@ -83,7 +83,7 @@ export HISTCONTROL=ignoredups:erasedups
 # Appends to history file instead of overwriting when shell exits
 shopt -s histappend
 # After each command, save and reload history
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ##### Set a view usable environment variables
 # Make sure your editor is set to vim in a few scenarios
