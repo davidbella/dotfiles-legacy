@@ -76,6 +76,14 @@ autocmd QuickFixCmdPost *grep* cwindow
 " Allow ctrl-p to find dot files
 let g:ctrlp_dotfiles = 1
 
+" Show buffers in vim-airline
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_min_count = 2
+
+let g:airline_powerline_fonts = 1
+
+" let g:airline#extensions#tabline#formatter = 'indent'
+
 " Run Pathogen
 execute pathogen#infect()
 
