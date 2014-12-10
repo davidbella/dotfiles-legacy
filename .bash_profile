@@ -10,6 +10,9 @@ source ${HOME}/.scripts/.bash_colors_256
 # Git tab complete
 source ${HOME}/.scripts/.git-completion.bash
 
+# Extract archive function
+source ${HOME}/.scripts/.extract
+
 # Brew tab complete
 if [[ `brew 2>/dev/null` && `brew --prefix`/etc/bash_completion ]]; then
   . `brew --prefix`/etc/bash_completion
