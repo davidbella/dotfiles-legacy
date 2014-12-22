@@ -84,6 +84,9 @@ let g:airline_powerline_fonts = 1
 
 " let g:airline#extensions#tabline#formatter = 'indent'
 
+" Copy file name to clipboard with ctrl-shift-c
+map <C-C> :let @+=expand("%")<CR>
+
 " Run Pathogen
 execute pathogen#infect()
 
