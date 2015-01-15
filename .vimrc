@@ -63,7 +63,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeWinSize=40
 
 " Binding to locate current file in NERDTree
-map <leader>r :NERDTreeFind<cr>
+map <leader>l :NERDTreeFind<cr>
 
 " filetype plugin for use with NERDTree commenter
 let NERDSpaceDelims = 1
