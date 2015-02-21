@@ -34,7 +34,7 @@ source ${HOME}/.scripts/bash-git-prompt/gitprompt.sh
 ##### Set informative environment variables
 # Grab the current IP Addresses
 function grab_ips {
-  if [[ ! -f '~/.external_ip' ]]
+  if [[ ! -f ~/.external_ip ]]
   then
     touch ~/.external_ip
     touch ~/.internal_ip
