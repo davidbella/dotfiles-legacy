@@ -47,7 +47,7 @@ function grab_ips {
     echo "" > ~/.internal_ip
     echo "" > ~/.vpn_ip
 
-    curl -4 icanhazip.com 2>/dev/null > ~/.external_ip
+    wget --quiet --timeout 2 icanhazip.com --output-document ~/.external_ip
 
     ifconfig | grep 'inet' | tail -1 | cut -d" " -f2 2>&1>/dev/null > ~/.internal_ip
 
