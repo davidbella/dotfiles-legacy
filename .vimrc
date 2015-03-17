@@ -34,6 +34,7 @@ set autoread
 set hidden
 
 syntax enable
+set synmaxcol=1200
 set background=dark
 colorscheme solarized
 
@@ -51,6 +52,9 @@ set dir=~/tmp
 " Have Buffergator open from the right and make it bigger
 let buffergator_viewport_split_policy="R"
 let buffergator_split_size=80
+
+" Delete current buffer
+map <leader>d :bd<cr>
 
 " Automagically open NERDTree on vim startup and default to file window instead of NERDTree
 autocmd vimenter * NERDTree
@@ -83,6 +87,14 @@ let g:ctrlp_dotfiles = 1
 let g:airline_powerline_fonts = 1
 
 " let g:airline#extensions#tabline#formatter = 'indent'
+
+" Disable Q going to exmode
+nnoremap Q <nop>
+
+" Make those debugger statements painfully obvious
+au BufEnter *.rb syn match error contained "\<binding.pry\>"
+au BufEnter *.rb syn match error contained "\<debugger\>"
+au BufEnter *.rb syn match error contained "\<byebug\>"
 
 " Copy file name to clipboard with ctrl-shift-c
 map <leader>c :let @+=expand("%")<CR>
