@@ -4,3 +4,4 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/.scripts/ ~/.scripts
 ln -s ~/dotfiles/.vim/ ~/.vim
 ln -s ~/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/dotfiles/.vault ~/.vault
