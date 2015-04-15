@@ -72,7 +72,7 @@ function prompt {
   local foreground=$(( ( RANDOM % 10 )  + 30 ))
   local background=$(( ( RANDOM % 10 )  + 40 ))
 
-  GIT_PROMPT_START="\n \$(clr_cyan \u) using \$(clr_brown \h) in \$(clr_blue '\w')"
+  GIT_PROMPT_START="\n \$(clr_cyan \u) using \$(clr_brown \h) in \$(clr_red '\w')"
   GIT_PROMPT_END="\n \[\033[1;${foreground}m\]\[\033[${background}m\]$(prompt_spark)\[\033[0m\]\[\033[0m\]  \[\033[32m\]\@\[\033[0m\]  "
 }
 
