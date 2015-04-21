@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-coffee-script"]
 	path = .vim/bundle/vim-coffee-script
 	url = git@github.com:kchmck/vim-coffee-script.git
+[submodule ".vim/bundle/nerdtree-git-plugin"]
+	path = .vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
