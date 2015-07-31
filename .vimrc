@@ -77,6 +77,9 @@ map <C-c> \c<space>
 " Automagically open quickfix window after some fugitive-vim commands
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Force fugitve-vim diff to be vertical split
+set diffopt+=vertical
+
 " Allow ctrl-p to find dot files
 let g:ctrlp_dotfiles = 1
 
@@ -99,9 +102,13 @@ au BufEnter *.rb syn match error contained "\<byebug\>"
 " Copy file name to clipboard with ctrl-shift-c
 map <leader>c :let @+=expand("%")<CR>
 
+" Find and replace word under cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 " Run Pathogen
 execute pathogen#infect()
 
 " Bind control p file finder to Command-T's - I got used to it
 " map <leader>t :ClearCtrlPCache<cr>\|:CtrlP<cr>
 " moved to ~/.vim/after/mappings/...
+"

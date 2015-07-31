@@ -116,5 +116,7 @@ alias gst="git status"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+eval `boot2docker shellinit 2>/dev/null`
+
 export RUBYMOTION_ANDROID_SDK=~/android-rubymotion/sdk
 export RUBYMOTION_ANDROID_NDK=~/android-rubymotion/ndk
