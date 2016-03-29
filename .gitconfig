@@ -4,3 +4,6 @@
 [user]
 	name = David Bella
 	email = dbella1@gmail.com
+
+[core]
+  pager = "diff-highlight | diff-so-fancy | less --tabs=1,5 -R"
