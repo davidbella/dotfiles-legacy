@@ -1,0 +1,12 @@
+[user]
+	name = David Bella
+	email = davidhbella@gmail.com
+[core]
+	editor = nvim
+[alias]
+	st = status
+	co = checkout
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
