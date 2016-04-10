@@ -27,6 +27,8 @@ prompt
 alias l='ls -Glh'
 alias ls='ls -Glh'
 alias la='ls -Glah'
+alias ls0="\ls | tr '\n' '\0'"
+alias xargs='xargs -0'
 
 # Experimental
 # use nvim over vim
