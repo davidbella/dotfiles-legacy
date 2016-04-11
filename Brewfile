@@ -75,3 +75,5 @@ brew 'neovim', args: ['HEAD']
 
 tap 'thoughtbot/formulae'
 brew 'rcm'
+
+brew 'mutt'
