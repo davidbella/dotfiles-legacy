@@ -12,8 +12,9 @@
 # <bitbar.image>https://cloud.githubusercontent.com/assets/6187908/12207887/464ff8b2-b617-11e5-9d61-787eed228552.png</bitbar.image>
 
 ZONES="America/Los_Angeles America/New_York Etc/GMT Europe/Minsk Asia/Hong_Kong"
-date +'%F %l:%M:%S %p %Z'
+date +'%a %F %l:%M:%S %p %Z'
 echo '---'
+date +'%A'
 for zone in $ZONES; do
   echo "$(TZ=$zone date +'%H:%M %z') $zone"
 done
