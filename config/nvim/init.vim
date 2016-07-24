@@ -18,7 +18,11 @@ Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 
+Plug '0ax1/lxvc'
+
 call plug#end()
+
+colorscheme lxvc
 
 """ Some standard vim config
 " Line numbers
