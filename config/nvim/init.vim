@@ -4,6 +4,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
+Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/nerdtree'
