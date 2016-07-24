@@ -39,4 +39,13 @@ alias vim=nvim
 
 export HOMEBREW_GITHUB_API_TOKEN=e7bfb679a52caa4fd1da5f60bcec6e2bf32b90dc
 
+export NVM_DIR="/Users/david/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export ANDROID_HOME=~/Library/Android/sdk
+
+PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
+PATH="/usr/local/opt/openvpn/sbin:${PATH}"
+export PATH
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
