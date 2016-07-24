@@ -1,8 +1,10 @@
 EXTERNAL_IP=`dig +short +time=1 myip.opendns.com @resolver1.opendns.com`
 INTERNAL_IP=`ifconfig | grep "inet[^6]" | grep broadcast | tail -1 | cut -d" " -f2 2>/dev/null`
+VPN_IP=`ifconfig utun0 2>/dev/null | grep 'inet' 2>/dev/null | awk '{print $2}' 2>/dev/null`
 
 echo $EXTERNAL_IP > ~/.external_ip
 echo $INTERNAL_IP > ~/.internal_ip
+echo $VPN_IP > ~/.vpn_ip
 
 source ${HOME}/.scripts/bash_colors.bash
 source ${HOME}/.scripts/git-completion.bash
