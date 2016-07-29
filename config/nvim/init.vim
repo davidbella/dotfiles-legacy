@@ -22,8 +22,6 @@ Plug '0ax1/lxvc'
 
 call plug#end()
 
-colorscheme lxvc
-
 """ Some standard vim config
 " Line numbers
 set number
