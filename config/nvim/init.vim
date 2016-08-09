@@ -87,3 +87,7 @@ let NERDSpaceDelims = 1
 
 " Keybinding for comment - TODO: make this better?
 map <C-c> \c<space>
+
+" Seems to be an issue with git gutter right now, disabling these for now...
+let g:gitgutter_eager = 0
+let g:gitgutter_realtime = 0
