@@ -12,7 +12,19 @@ brew 'gpg'
 brew 'bash-git-prompt'
 brew 'ctags'
 brew 'the_silver_searcher'
+brew 'watch'
 brew 'postgresql'
+brew 'imagemagick'
+cask 'docker-toolbox'
+brew 'docker-machine-nfs'
+brew 'diff-so-fancy'
+brew 'jq'
+brew 'phantomjs'
+brew 'redis'
+
+brew 'freetds' # specific for the namely app's gem use
+brew 'kubernetes-cli'
+brew 'kubernetes-helm'
 
 tap 'thoughtbot/formulae'
 brew 'rcm'
@@ -29,9 +41,9 @@ cask 'iterm2'
 cask 'spectacle'
 cask 'flux'
 cask 'bitbar'
-# waiting on determining if I want to use my own license or not
-# cask 'alfred'
-# cask 'bartender'
+cask 'alfred'
+cask 'bartender'
+cask 'libreoffice'
 
 
 # Fonts

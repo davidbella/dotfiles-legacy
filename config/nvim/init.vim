@@ -1,11 +1,17 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'pangloss/vim-javascript'
+Plug 'isRuslan/vim-es6'
+Plug 'mxw/vim-jsx'
+Plug 'slim-template/vim-slim'
+Plug 'digitaltoad/vim-pug'
 Plug 'tpope/vim-fugitive'
+Plug 'fousa/vim-flog'
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -17,6 +23,8 @@ Plug 'mileszs/ack.vim'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-syntastic/syntastic'
+Plug 'neomake/neomake' " to replace syntastic, hopefully
 
 Plug '0ax1/lxvc'
 
@@ -25,6 +33,7 @@ call plug#end()
 """ Some standard vim config
 " Line numbers
 set number
+set numberwidth=5
 
 " All the indentations
 set autoindent
@@ -64,10 +73,14 @@ let NERDTreeCascadeOpenSingleChildDir=0
 " Binding to locate current file in NERDTree
 map <leader>l :NERDTreeFind<cr>
 
+" leader-c to copy current file name into clipboard buffer
+nmap <leader>c :let @+ = expand("%")<cr>
+
 """ Buffergator
 " Have Buffergator open from the right and make it bigger
 let buffergator_viewport_split_policy="R"
 let buffergator_split_size=80
+let g:buffergator_show_full_directory_path=0
 
 """ ack.vim
 " Set ack.vim to use ag
@@ -75,8 +88,8 @@ if executable('ag')
   let g:ackprg = 'ag'
 endif
 
-" Auto preview for ack.vim
-let g:ackpreview=1
+" Auto preview for ack.vim turned off
+let g:ackpreview=0
 
 """ NERDCommentor
 " filetype plugin on
@@ -89,5 +102,61 @@ let NERDSpaceDelims = 1
 map <C-c> \c<space>
 
 " Seems to be an issue with git gutter right now, disabling these for now...
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 1
+" let g:gitgutter_realtime = 1
+
+" neomake syntax highlighting
+let g:neomake_ruby_rubocop_maker = {
+  \ 'args': ['--config', 'config/.rubocop.yml']
+  \ }
+let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
+
+let g:neomake_javascript_eslint_maker = {
+  \ 'exe': './node_modules/.bin/eslint',
+  \ 'args': ['--no-color', '--format', 'compact', '--config', './.eslintrc'],
+  \ 'errorformat': '%f: line %l\, col %c\, %m'
+  \ }
+let g:neomake_javascript_enabled_makers = ['eslint']
+
+autocmd! BufWritePost * Neomake
+
+" set jsx syntax for .es6 files
+autocmd BufNewFile,BufRead *.es6 set syntax=jsx
+
+let g:jsx_ext_required = 0
+
+function! LinePercent()
+  return line('.') * 100 / line('$') . '%'
+endfunction
+
+" statusline
+set statusline=/%f
+set statusline+=\ %m        " Modified flag
+set statusline+=%=          " Switch to the right side
+set statusline+=--->\       " this is an indicator for how far over you are
+set statusline+=%c\ \ \ \   " Column
+set statusline+=%l          " Current line
+set statusline+=/           " Separator
+set statusline+=%L\ \       " Total lines
+set statusline+=%{LinePercent()}
+
+" show me 80 character limit
+highlight ColorColumn ctermbg=lightgrey
+set colorcolumn=81
+
+" ctrlp needs some more flexibility for the namely app
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" auto wrap .txt files
+set textwidth=80
+:au BufNewFile,BufRead *.txt set wrap
+:au BufNewFile,BufRead *.txt set linebreak
+
+
+let g:rails_projections = { "app/lib/*.rb": { "alternate": ["spec/lib/%s_spec.rb"] } }
+let g:rails_projections = { "app/assets/javascripts/*.es6": { "alternate": ["app/assets/test/%s.spec.es6"] } }
