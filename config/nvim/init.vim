@@ -4,6 +4,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
@@ -19,11 +20,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'mileszs/ack.vim'
+Plug 'majutsushi/tagbar'
 
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
+Plug 'plasticboy/vim-markdown'
 Plug 'neomake/neomake' " to replace syntastic, hopefully
 
 Plug '0ax1/lxvc'
@@ -120,8 +123,8 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 
 autocmd! BufWritePost * Neomake
 
-" set jsx syntax for .es6 files
-autocmd BufNewFile,BufRead *.es6 set syntax=jsx
+" set javascript syntax for .es6 files
+autocmd BufNewFile,BufRead *.es6 set syntax=javascript
 
 let g:jsx_ext_required = 0
 
@@ -153,10 +156,14 @@ if executable('ag')
 endif
 
 " auto wrap .txt files
-set textwidth=80
-:au BufNewFile,BufRead *.txt set wrap
-:au BufNewFile,BufRead *.txt set linebreak
+" set textwidth=80
+" :au BufNewFile,BufRead *.txt set wrap
+" :au BufNewFile,BufRead *.txt set linebreak
 
+""" Vim Markdown
+" disable folding
+let g:vim_markdown_folding_disabled = 1
 
 let g:rails_projections = { "app/lib/*.rb": { "alternate": ["spec/lib/%s_spec.rb"] } }
 let g:rails_projections = { "app/assets/javascripts/*.es6": { "alternate": ["app/assets/test/%s.spec.es6"] } }
+let g:rails_projections = { "app/assets/javascripts/ui/review_cycles/steps/*.es6": { "alternate": ["app/assets/test/ui/review_cycles/steps/%s.spec.es6"] } }

@@ -45,6 +45,13 @@ alias kpp='kubectl --namespace="preprod" '
 alias int-pepe='kubectl --namespace="tops" exec -ti $(kubectl --namespace="tops" get pod | grep -e "int-pepe-hcm-\d" | cut -f1 -d" ") '
 
 alias nuke='rm -rf node_modules && npm cache clean && npm i && npm start'
+alias clear_browserify_cache='rm .gulp/watchify-cache.json'
+
+alias namelyset='echo "hcm.image.tag=$(git rev-parse HEAD | cut -c-7),hcm.global.assetsVersion=$(git rev-list --max-count=1 HEAD app/assets package.json | shasum | cut -c1-8)"'
+
+vimd() {
+  vim $(git diff --name-only develop)
+}
 
 # makes sure docker machine named "default" is up and running and env loaded
 docker_running=$(docker-machine ls | grep default)
@@ -63,10 +70,10 @@ export HOMEBREW_GITHUB_API_TOKEN=e7bfb679a52caa4fd1da5f60bcec6e2bf32b90dc
 export NVM_DIR="/Users/davidbella/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# chruby & autoswitching
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 
 # teamocil autocomplete
 # must come after RVM
 complete -W "$(teamocil --list)" teamocil
-

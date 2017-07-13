@@ -7,6 +7,9 @@
 	st = status
 	co = checkout
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	diff-tag = "!f() { git log "$1"..production --pretty=format:\"%an%x09||%x09%s\" | sort; }; f"
+  diff-tag-tops = "!f() { git log "$1"..production --pretty=format:\"%an%x09||%x09%s\" | sort | grep -e \"David Bella\\|David Lo\\|Carol Mirakove\\|Tyler Sargent\"; }; f"
+	diff-dev = "!f() { git log develop..production --pretty=format:\"%an%x09||%x09%s\" | sort; }; f"
 [pager]
 	diff = diff-so-fancy | less --tabs=4 -RFX
 	show = diff-so-fancy | less --tabs=4 -RFX
