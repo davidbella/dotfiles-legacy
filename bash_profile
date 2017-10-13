@@ -25,11 +25,12 @@ prompt
 
 # Aliases
 # ls
-alias l='ls -Glh'
-alias ls='ls -Glh'
-alias la='ls -Glah'
+alias l='\ls -Glh'
+# alias ls='ls -Glh'
+alias la='\ls -Glah'
 alias ls0="\ls | tr '\n' '\0'"
 alias xargs='xargs -0'
+alias ls='exa -l --git'
 
 # use nvim over vim
 alias vim=nvim
@@ -44,7 +45,7 @@ alias kpp='kubectl --namespace="preprod" '
 
 alias int-pepe='kubectl --namespace="tops" exec -ti $(kubectl --namespace="tops" get pod | grep -e "int-pepe-hcm-\d" | cut -f1 -d" ") '
 
-alias nuke='rm -rf node_modules && npm cache clean && npm i && npm start'
+alias nuke='rm -rf node_modules && npm cache clean && npm i'
 alias clear_browserify_cache='rm .gulp/watchify-cache.json'
 
 alias namelyset='echo "hcm.image.tag=$(git rev-parse HEAD | cut -c-7),hcm.global.assetsVersion=$(git rev-list --max-count=1 HEAD app/assets package.json | shasum | cut -c1-8)"'
@@ -77,3 +78,6 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 # teamocil autocomplete
 # must come after RVM
 complete -W "$(teamocil --list)" teamocil
+
+export ERL_AFLAGS="-kernel shell_history enabled"
+export TILLER_NAMESPACE=default

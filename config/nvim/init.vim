@@ -114,6 +114,7 @@ let g:neomake_ruby_rubocop_maker = {
   \ }
 let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 
+" ./node_modules/.bin/eslint --no-color --format compact --config ./.eslintrc
 let g:neomake_javascript_eslint_maker = {
   \ 'exe': './node_modules/.bin/eslint',
   \ 'args': ['--no-color', '--format', 'compact', '--config', './.eslintrc'],

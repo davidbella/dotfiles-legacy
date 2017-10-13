@@ -26,6 +26,7 @@ brew 'jq'
 brew 'phantomjs'
 brew 'redis'
 brew 'awscli'
+brew 'heroku'
 brew 'exercism'
 brew 'ffmpeg'
 brew 'gifsicle'
@@ -44,6 +45,8 @@ brew 'tldr'
 
 tap 'neovim/neovim'
 brew 'neovim', args: ['HEAD']
+
+cask 'sublime-text'
 
 
 # Core GUI applications
